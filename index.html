@@ -1,0 +1,135 @@
+<html lang="pt-br">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="bootstrap/dist/css/bootstrap.css">
+  <script src="jquery/dist/jquery.js"></script>
+
+  <title>Teste devi</title>
+<style> 
+ input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+   h6 {margin: 0px; padding: 0px;}
+</style>
+</head>
+
+<body> 
+  
+<!--Criando Formulário responsivo bootstrap 4-->
+<div class="container" style=" margin-top: 20px; border:1px solid black;">
+  <div class="row" style="border-bottom:1px solid black;">
+    <h5>Devi Tecnologia</h5>
+  </div>
+  <div class="row justify-content-center mb-5">
+    <div class="col-sm-12 col-md-10 col-lg-8">
+      <form  method="POST" >
+        <div class="form-row">
+          <div class="form-group col-sm-3">
+            <label for="nome">Número</label>
+            <input type="text" id="num" class="form-control">
+          </div>
+          <div class="form-group col-sm-3">
+            <label for="sobrenome">Data</label>
+            <input type="text" id="data" class="form-control">
+          </div>
+          <div class="form-group col-sm-6">
+            <label for="Endereço">Nome Do Cliente</label>
+            <input type="text" id="nome" class="form-control">
+          </div>
+        </div>
+        <div class="form-row">
+          
+        </div> 
+        <div class="form-row">
+          <div class="form-group col-sm-4">
+            <label for="Cidade">Produto</label>
+            <input type="text" id="produto" class="form-control">
+          </div>
+          <div class="form-group col-sm-2">
+            <label for="Cep">Quantidade</label>
+            <input type="number" id="qtd" class="form-control">
+          </div>
+          <div class="form-group col-sm-6">
+            <label for="Cidade">Valor Unitário</label>
+            <input type="number" id="valor" class="form-control">
+          </div>
+        </div>
+        <button class="btn btn-primary" id="inserir">Inserir item</button>
+        <h5 style="margin-top: 15px;" >Itens</h5>
+        
+        <div id="result" style="min-height: 50px; border:1px solid black; margin-bottom: 30px; font-size: large;">
+        <h6>Produto &nbsp; Quantidade &nbsp; Valor Unitário &nbsp;Valor total</h6><br>  
+        </div>
+         <div id="total" style="text-align: right;">
+         </div>
+        
+        <div class="form-row">
+          <button class="btn btn-primary m-3" type="submit" id="imprime">Imprimir</button>
+          <button class="btn btn-primary m-3" type="submit" id="limpar">Limpar</button>
+        </div>
+     </form>
+    </div>
+  </div>
+</div>
+<div id="impressao" style=" width: 80%; border:1px solid black; margin: 35px auto 0 auto; font-size: large; display: none;">
+  <h6>Produto &nbsp; Quantidade &nbsp; Valor Unitário &nbsp;Valor total</h6><br>  
+  </div>
+   </div>
+</body>
+
+<script>
+var total = 0;
+$('#inserir').click(function(e){
+        var produto = document.getElementById("produto").value;
+        var qtd = document.getElementById("qtd").value;
+        var valor = document.getElementById("valor").value;
+        var valorTot = parseFloat(qtd) * parseFloat(valor);
+        var result = document.getElementById("result");
+        result.innerHTML += produto +"&nbsp;&nbsp;&nbsp;&nbsp;"+ qtd+"&nbsp;&nbsp;&nbsp;&nbsp;"+ "R$"+ valor+"&nbsp;&nbsp;&nbsp;&nbsp;"+ "R$"+ valorTot + "<br>";
+        e.preventDefault();
+        
+        total = total + valorTot;
+        var tot = document.getElementById("total");
+        tot.innerHTML = "TOTAL R$ " + total.toFixed(2);
+})
+$('#limpar').click(function(e){
+     var produto = document.getElementById("produto").value = "";
+     var qtd = document.getElementById("qtd").value = "";
+     var valor = document.getElementById("valor").value = "";
+     var nome = document.getElementById("nome").value = "";
+     var num = document.getElementById("num").value = "";
+     var data = document.getElementById("data").value = "";
+     var result = document.getElementById("result");
+     result.innerHTML = "";
+    var tot = document.getElementById("total");
+    tot.innerHTML = "";
+    e.preventDefault();
+})
+$('#imprime').click(function(e){
+  $("#impressao").show();
+  var id = document.getElementById("num").value;
+  var data = document.getElementById("data").value;
+  var nome = document.getElementById("nome").value;
+  var produto = document.getElementById("produto").value;
+  var qtd = document.getElementById("qtd").value;
+  var valor = document.getElementById("valor").value;
+  var valorTot = parseFloat(qtd) * parseFloat(valor);
+  var result = document.getElementById("impressao");
+  result.innerHTML += "<b>Venda: </b>" + id + "<br><br>" +
+                      "<b>Data: </b>" + data + "<br>" +
+                      "<b>Nome do Cliente: </b>" + nome + "<br>" +
+  produto +"&nbsp;&nbsp;&nbsp;&nbsp;"+ qtd+"&nbsp;&nbsp;&nbsp;&nbsp;"+ "R$" + valor+"&nbsp;&nbsp;&nbsp;&nbsp;"+ "R$"+valorTot + "<br>" +
+  "TOTAL: R$ " + total.toFixed(2); 
+
+  e.preventDefault();
+
+})
+</script>
+</html>
